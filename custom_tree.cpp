@@ -15,6 +15,7 @@ class Tree
 
 	void upper(string& loc);
 	void findnAdd(Node* newNode, Node* node, string loc, int pos);
+	void findnRemove(Node* node, string loc, int pos);
 	void printInorder(Node*);
 	void printPostorder(Node*);
 	void printPreorder(Node*);
@@ -25,6 +26,7 @@ public:
 	}	
 
 	void add(int, string);
+	void remove(string);
 	void print(const char*);
 };
 
@@ -39,6 +41,40 @@ void Tree::upper(string& loc) {
 		}
 	}
 }
+
+/*
+void Tree::findnRemove(Node* node, string loc, int pos) {
+	if(node == NULL) {
+		cout << "Invalid code";
+		return;
+	}
+
+	if(pos == loc.size() - 1) {
+		if (loc[pos] == 'L')
+		{	
+			cout << "left : " << node->left->data << endl;
+			node->left = node->left->left;
+			return;
+		}
+		else if (loc[pos] == 'R')
+		{
+			cout << "right : " << node->right->data << endl;				
+			node->right = node->right->left;
+			return;
+		}
+	}
+	if (loc[pos] == 'L')
+	{
+		cout << "left->";
+		findnRemove(node->left,loc,++pos);
+	}
+	else if (loc[pos] == 'R')
+	{
+		cout << "right->";
+		findnRemove(node->right,loc,++pos);
+	}
+}
+*/
 
 void Tree::findnAdd(Node* newNode, Node* node, string loc, int pos) {
 	if(node == NULL) {
@@ -118,7 +154,16 @@ void Tree::add(int value, string loc) {
 	{
 		findnAdd(temp, root, loc, 0);
 	}
+
+	temp = NULL;
+	delete temp;
 }
+
+/*
+void Tree::remove(string loc) {
+	findnRemove(root,loc,0);
+}
+*/
 
 void Tree::print(const char* type) {
 	if(strcmp(type, "in") == 0) {
@@ -147,8 +192,17 @@ int main(int argc, char const *argv[])
 	t.add(60, "R");
 	t.add(70, "Ll");
 	t.add(80, "lr");
+	t.add(90, "lr");
+
 	t.print("in");
 	t.print("pre");
 	t.print("post");
+
+	/*
+	t.remove("L");
+	t.print("in");
+	t.print("pre");
+	t.print("post");
+	*/
 	return 0;
 }
